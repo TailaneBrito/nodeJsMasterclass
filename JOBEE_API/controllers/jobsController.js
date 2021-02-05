@@ -7,6 +7,7 @@ exports.getJobs = (req, res, next) => {
         success : true,
         middlewareUser : req.user,
         requestMethod : req.method,
+        url : req.url,
         message : 'This route will display jobs in the future'
     });
 }
