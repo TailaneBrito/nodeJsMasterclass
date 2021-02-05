@@ -19,6 +19,7 @@ const middlware = (req, res, next) => {
     
     //set the global user variable
     req.user = "Tailane Brito";
+    req.requestMethod = req.method
     next();
 }
 

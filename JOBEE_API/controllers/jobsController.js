@@ -6,6 +6,7 @@ exports.getJobs = (req, res, next) => {
     res.status(200).json({
         success : true,
         middlewareUser : req.user,
+        requestMethod : req.method,
         message : 'This route will display jobs in the future'
     });
 }
