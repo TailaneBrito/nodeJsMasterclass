@@ -128,7 +128,7 @@ exports.jobStats = async (req,res,next) => {
         }
     ]);
 
-    if(stats.lengh===0){
+    if(stats.length===0){
         return res.status(200).json({
             success : false,
             message : `No stats found for the topic ${req.params.topic}.`

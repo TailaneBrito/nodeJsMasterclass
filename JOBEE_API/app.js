@@ -15,20 +15,6 @@ connectDatabase();
 app.use(express.json());
 
 
-//create middleware, needs to use the next to move on, it will always going to run. Available everywhere
-//into this project. function
-// const middlware = (req, res, next) => {
-//     console.log('Hello from the middleware');
-    
-//     //set the global user variable
-//     req.user = "Tailane Brito";
-//     req.requestMethod = req.method
-//     req.url = req.url
-//     next();
-// }
-
-// app.use(middlware);
-
 //importing routes
 const jobs = require('./routes/jobs');
 
