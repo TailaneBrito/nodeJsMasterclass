@@ -67,7 +67,7 @@ exports.updateJob = async (req, res, nex) => {
 }
 
 //Deleat a job => /api/v1/job/:id
-exports.deleJob = async (req, res, next) => {
+exports.deletJob = async (req, res, next) => {
     let job = await Job.findById(req.params.id);
 
     if (!job) {
@@ -108,4 +108,35 @@ exports.getJobsInRadius = async (req, res, next) => {
         results : jobs.length,
         data : jobs
     });
+};
+
+//get Status about at topic(job) >= /api/v1/stats/:topic
+exports.jobStats = async (req,res,next) => {
+    const stats = await Job.aggregate([
+        {
+            $match : { $text : { $search : "\""+req.params.topic + "\""} }
+        },
+        {
+            $group : {
+                _id : {$toUpper : '$experience'},
+                totalJobs : { $sum : 1 },
+                avgPosition : { $avg : '$positions' },
+                avgSalary : { $avg : '$salary' },
+                minSalary : { $min : '$salary' },
+                maxSalary : { $max : '$salary' }
+            }
+        }
+    ]);
+
+    if(stats.lengh===0){
+        return res.status(200).json({
+            success : false,
+            message : `No stats found for the topic ${req.params.topic}.`
+        })
+    }
+
+    res.status(200).json({
+        success : true,
+        data : stats
+    })
 };
