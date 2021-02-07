@@ -5,7 +5,8 @@ const router = express.Router();
 const { 
     getJobs, 
     newJob,
-    getJobsInRadius
+    getJobsInRadius,
+    updateJob
 
 } = require('../controllers/jobsController');
 
@@ -15,5 +16,7 @@ router.route('/jobs/:zipcode/:distance').get(getJobsInRadius)
 
 //send data to the database
 router.route('/job/new').post(newJob);
+
+router.route('/job/:id').put(updateJob);
 
 module.exports = router;
