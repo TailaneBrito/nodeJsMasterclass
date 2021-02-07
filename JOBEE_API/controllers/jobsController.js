@@ -2,13 +2,14 @@ const Job = require('../models/jobs');
 
 
 //Get all jobs => / api/v1/jobs
-exports.getJobs = (req, res, next) => {
+exports.getJobs = async (req, res, next) => {
+
+    const jobs = await Job.find();
+
     res.status(200).json({
         success : true,
-        middlewareUser : req.user,
-        requestMethod : req.method,
-        url : req.url,
-        message : 'This route will display jobs in the future'
+        results : jobs.length,
+        data : jobs
     });
 }
 
