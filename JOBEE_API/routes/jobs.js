@@ -6,7 +6,8 @@ const {
     getJobs, 
     newJob,
     getJobsInRadius,
-    updateJob
+    updateJob,
+    deleJob
 
 } = require('../controllers/jobsController');
 
@@ -17,6 +18,8 @@ router.route('/jobs/:zipcode/:distance').get(getJobsInRadius)
 //send data to the database
 router.route('/job/new').post(newJob);
 
-router.route('/job/:id').put(updateJob);
+router.route('/job/:id')
+    .put(updateJob)
+    .delete(deleJob);
 
 module.exports = router;
