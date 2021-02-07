@@ -1,0 +1,15 @@
+{
+    "title" : "Primeiro API COM MOONGOOSE",
+    "description" : "We are looking forward",
+    "email" : "tailane.brito01@gmail.com",
+    "address" : "rua alfa",
+    "company" : "IBM",
+    "industry" : [ 
+        "Information Technology" 
+    ],
+    "jobType" : "Full-Time",
+    "minEducation" : "Masters",
+    "positions" : 1,
+    "experience" : "2 - 5 years",
+    "salary" : "30000"
+}

@@ -1,21 +1,19 @@
 const mongoose = require('mongoose');
-
-//validate our inpute
 const validator = require('validator');
 
 const jobSchema = new mongoose.Schema({
     title : {
-        title : String,
-        required : [true, 'Please enter Job Title.'],
+        type : String,
+        required : [true, 'Please give the job a title'],
         trim : true,
-        maxLength : [100, 'Job title cannot exceed 100 characteres.']
+        maxlength : [100, 'Job title cannot exceed 100 characteres.']
     },
     //slug is a ulr
     slug : String,
     description : {
         type : String,
         required : [true, 'Please enter job description'],
-        maxLength : [1000, 'Job description cannot exceed 1000 characters.']
+        maxlength : [1000, 'Job description cannot exceed 1000 characters.']
     },
     email : {
         type : String,
@@ -23,11 +21,11 @@ const jobSchema = new mongoose.Schema({
     },
     address : {
         type : String,
-        require : [true, 'Please add an address.']
+        required : [true, 'Please add an address.']
     },
     company : {
         type: String,
-        require : [true, 'Please add company name.']
+        required : [true, 'Please add company name.']
     },
     industry : {
         //array of strings
@@ -47,7 +45,7 @@ const jobSchema = new mongoose.Schema({
     },
     jobType : {
         type : String,
-        require : true,
+        required : true,
         enum : {
             values : [
                 'Full-Time',
@@ -73,7 +71,7 @@ const jobSchema = new mongoose.Schema({
         type : Number,
         default : 1
     },
-    Experience : {
+    experience : {
         type : String, 
         required : true,
         enum : {
@@ -96,12 +94,12 @@ const jobSchema = new mongoose.Schema({
     },
     lastDate : {
         type : Date, 
-        default : new Date().SetDate(new Date().getDate() + 7)
+        default : new Date().setDate(new Date().getDate() + 7)
     },
     applicantsApplied : {
         type : [Object],
         select : false
-    },
+    }
 });
 
-module.exports = mongoose.model('Job', jobSchema)
+module.exports = mongoose.model('Job', jobSchema);
