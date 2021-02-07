@@ -1,4 +1,5 @@
 const Job = require('../models/jobs');
+const geoCoder = require('../utils/geocoder');
 
 
 //Get all jobs => / api/v1/jobs
@@ -23,3 +24,27 @@ exports.newJob = async (req, res, next) => {
         data : job
     });
 }
+
+//search jobs with radius => /api/v1/jobs/:zipcode/:distance
+exports.getJobsInRadius = async (req, res, next) => {
+    const { zipcode, distance } = req.params;
+
+    //getting latitude and longitude from geocoder with zipcode 
+    const loc = await geoCoder.geocode(zipcode);
+    const latitude = loc[0].latitude;
+    const longitude = loc[0].longitude;
+
+    //radius of the earth on miles
+    const radius = distance / 3963;
+
+    const jobs = await Job.find({
+        location : {$geoWithin : {$centerSphere : [[longitude, latitude], radius]
+        }}
+    })
+
+    res.status(200).json({
+        success : true,
+        results : jobs.length,
+        data : jobs
+    });
+};
