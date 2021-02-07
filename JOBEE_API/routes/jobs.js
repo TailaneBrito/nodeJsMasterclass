@@ -7,15 +7,17 @@ const {
     newJob,
     getJobsInRadius,
     updateJob,
-    deleJob
+    deleJob,
+    getJob
 
 } = require('../controllers/jobsController');
 
-//route that will get the 
+
 router.route('/jobs').get(getJobs);
+router.route('/job/:id/:slug').get(getJob);
 router.route('/jobs/:zipcode/:distance').get(getJobsInRadius)
 
-//send data to the database
+
 router.route('/job/new').post(newJob);
 
 router.route('/job/:id')
